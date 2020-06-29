@@ -40,21 +40,21 @@
     <div *ngIf="courseSemesterDataCode">
         <ion-row *ngIf="isTeacherOrAdmin">
             <ion-col size="6">
-                <ion-button id="student-grade-addGRADEBtn" type="submit" expand="block" (click)="addStudentGrade()"
-                    class="ionBtn ionBtn-success" value="AddGrade">
+                <ion-button id="student-grade-addGRADEBtn" *ngIf="hidebutton" type="submit" expand="block"
+                    (click)="addStudentGrade()" class="ionBtn ionBtn-success" value="AddGrade">
                     <ion-icon name="add" slot="start"></ion-icon>
                     {{ 'ADDGRADE' | translate }}
                 </ion-button>
             </ion-col>
             <ion-col size="6">
-                <ion-button id="courses-manageCourseBtn" type="submit" expand="block" (click)="updateStudentGrade()"
-                    class="ionBtn ionBtn-update" value="UpdateGrade">
+                <ion-button id="courses-manageCourseBtn" *ngIf="hidebutton" type="submit" expand="block"
+                    (click)="updateStudentGrade()" class="ionBtn ionBtn-update" value="UpdateGrade">
                     <ion-icon name="create-outline" slot="start"></ion-icon>
                     {{ 'UPDATEGRADE' | translate }}
                 </ion-button>
             </ion-col>
         </ion-row>
-        <ion-button id="gradessheet-gradesReportBtn" type="submit" expand="block" *ngIf="isTeacher"
+        <ion-button id="gradessheet-gradesReportBtn" type="submit" expand="block" *ngIf="isTeacherOrAdmin"
             (click)="gradesReport()" class="ionBtn ionBtn-success" value="gradesReport">
             <ion-icon name="bar-chart-outline" slot="start"></ion-icon>
             {{ 'GRADESREPORT' | translate }}

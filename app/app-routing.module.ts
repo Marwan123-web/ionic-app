@@ -286,7 +286,7 @@ const routes: Routes = [
     path: 'course/semester/students-grades-report/:courseCode/:semester_time',
     loadChildren: () => import('./Teacher/grades-report/grades-report.module').then(m => m.gradesReportPageModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.Teacher] }
+    data: { roles: [Role.Teacher, Role.Admin] }
   },
 
 

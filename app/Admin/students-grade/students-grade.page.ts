@@ -43,6 +43,8 @@ export class studentsGradePage implements OnInit {
   selectedLanguage: string;
   courseCode: string;
   currentUser: User;
+  checkSemesterStatus: any;
+  hidebutton: boolean;
 
   constructor(private adminservices: AdminservicesService, private _Activatedroute: ActivatedRoute,
     private _router: Router,
@@ -80,6 +82,13 @@ export class studentsGradePage implements OnInit {
 
         this.courseDataCode = res.findsemesterdata;
         this.courseSemesterDataCode = res.findsemesterdata.semesters[0];
+        this.checkSemesterStatus = this.courseSemesterDataCode.semester_status;
+        if (this.checkSemesterStatus == "finished") {
+          this.hidebutton = false;
+        }
+        else if (this.checkSemesterStatus == "open") {
+          this.hidebutton = true;
+        }
         // this.courseTotalGrades = this.coursedata.length;
         for (let i = 0; i < this.coursedata.length; i++) {
           this.adminservices.semesterStudentsGradesheet(x, this.courseCode, this.semester_time, this.coursedata[i].type).subscribe(res => {

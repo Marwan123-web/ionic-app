@@ -77,7 +77,8 @@
         </ion-row>
         <ion-row *ngIf="coursesemesterdata">
             <ion-col size="6" *ngIf="isTeacherOrAdmin">
-                <ion-button id="courses-addCourseGradeBtn" type="submit" expand="block" class="ionBtn ionBtn-update"
+                <ion-button id="courses-addCourseGradeBtn" *ngIf="hidebutton" type="submit" expand="block"
+                    class="ionBtn ionBtn-update"
                     [routerLink]="['/course/semester/add-course-grade',coursedata.courseCode,coursesemesterdata.semester_time]"
                     value="addCourseGrade">
                     <ion-icon name="sync" slot="start"></ion-icon>
@@ -85,7 +86,8 @@
                 </ion-button>
             </ion-col>
             <ion-col size="6" *ngIf="isTeacherOrAdmin">
-                <ion-button id="courses-deleteCourseGradeBtn" type="submit" expand="block" class="ionBtn ionBtn-danger"
+                <ion-button id="courses-deleteCourseGradeBtn" *ngIf="hidebutton" type="submit" expand="block"
+                    class="ionBtn ionBtn-danger"
                     [routerLink]="['/course/semester/delete-course-grade',coursedata.courseCode,coursesemesterdata.semester_time]"
                     value="deleteCourseGrade">
                     <ion-icon name="trash" slot="start"></ion-icon>
@@ -114,7 +116,8 @@
         </ion-row>
         <ion-row *ngIf="coursesemesterdata">
             <ion-col size="6" *ngIf="isTeacher">
-                <ion-button id="courses-addCourseGradeBtn" type="submit" expand="block" class="ionBtn ionBtn-update"
+                <ion-button id="courses-addCourseGradeBtn" *ngIf="hidebutton" type="submit" expand="block"
+                    class="ionBtn ionBtn-update"
                     [routerLink]="['/course/semester/add-lecture',coursedata.courseCode,coursesemesterdata.semester_time]"
                     value="addCourseGrade">
                     <ion-icon name="sync" slot="start"></ion-icon>
@@ -133,8 +136,8 @@
 
         <ion-row *ngIf="coursesemesterdata">
             <ion-col size="6" *ngIf="isStudent">
-                <ion-button id="courses-addCourseGradeBtn" type="submit" expand="block" class="ionBtn ionBtn-update"
-                    *ngIf="coursesemesterdata"
+                <ion-button id="courses-addCourseGradeBtn" *ngIf="hidebutton" type="submit" expand="block"
+                    class="ionBtn ionBtn-update"
                     [routerLink]="['/attend-me',coursedata.courseCode,coursesemesterdata.semester_time]"
                     value="addCourseGrade">
                     <ion-icon name="sync" slot="start"></ion-icon>

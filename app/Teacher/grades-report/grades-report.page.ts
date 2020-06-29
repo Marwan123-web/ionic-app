@@ -72,7 +72,6 @@ export class gradesReportPage implements OnInit {
       this.courseCode = params.get('courseCode');
       this.semester_time = params.get('semester_time');
       this.teacherservices.semesterGradesReport(this.courseCode, this.semester_time).subscribe((res: GradesData[]) => {
-        console.log(res)
         res.forEach(y => {
           this.gradeType.push(y.GradeType);
           this.score.push(y.GradeGrade);

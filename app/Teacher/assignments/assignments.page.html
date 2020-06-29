@@ -44,19 +44,17 @@
             </ion-list>
         </ion-card>
     </div>
-    <ion-row *ngIf="coursesdata">
-        <ion-col size="6" *ngIf="coursesemesterdata1">
-            <ion-button id="assignments-addTaskBtn" type="submit" expand="block" *ngIf="isTeacher"
-                [routerLink]="['/course/semester/add-task',coursesdata.courseCode,coursesemesterdata1.semester_time]"
+    <ion-row *ngIf="hidebutton">
+        <ion-col size="6">
+            <ion-button id="assignments-addTaskBtn" type="submit" expand="block" *ngIf="isTeacher" (click)="addTask()"
                 class="ionBtn ionBtn-success" value="addTask">
                 <ion-icon name="add" slot="start"></ion-icon>
                 {{ 'ADDTASK' | translate }}
             </ion-button>
         </ion-col>
-        <ion-col size="6" *ngIf="coursesemesterdata1">
-            <ion-button id="assignments-deleteTaskBtn" type="submit" expand="block" *ngIf="isTeacher"
-                [routerLink]="['/course/semester/delete-task',coursesdata.courseCode,coursesemesterdata1.semester_time]"
-                class="ionBtn ionBtn-success" value="deleteTask">
+        <ion-col size="6">
+            <ion-button id="assignments-deleteTaskBtn" type="submit" (click)="deleteTask()" expand="block"
+                *ngIf="isTeacher" class="ionBtn ionBtn-success" value="deleteTask">
                 <ion-icon name="trash" slot="start"></ion-icon>
                 {{ 'DELETETASK' | translate }}
             </ion-button>

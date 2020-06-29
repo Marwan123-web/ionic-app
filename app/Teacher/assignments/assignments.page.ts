@@ -26,8 +26,10 @@ export class assignmentsPage implements OnInit {
   courseCode: string;
   semester_time: string;
   coursesemesterdata1: any;
+  checkSemesterStatus: any;
+  hidebutton: boolean;
   constructor(
-    private router: Router,
+    private _router: Router,
     private authenticationService: AuthService,
     private teacherservices: TeacherServiceService,
     private _Activatedroute: ActivatedRoute,
@@ -70,6 +72,13 @@ export class assignmentsPage implements OnInit {
       );
       this.teacherservices.getCourseSemesterData(this.courseCode, this.semester_time).subscribe(res => {
         this.coursesemesterdata1 = res.findsemesterdata.semesters[0];
+        this.checkSemesterStatus = this.coursesemesterdata1.semester_status
+        if (this.checkSemesterStatus == "finished") {
+          this.hidebutton = false;
+        }
+        else if (this.checkSemesterStatus == "open") {
+          this.hidebutton = true;
+        }
         this.coursesemesterdata = res.findsemesterdata.semesters[0].tasks;
         if (this.coursesemesterdata.length == 0) {
           this.noTasks = "No Tasks Yet!"
@@ -81,4 +90,18 @@ export class assignmentsPage implements OnInit {
     });
 
   }
-}
+  addTask() {
+    this.sub = this._Activatedroute.paramMap.subscribe(params => {
+      this.courseCode = params.get('courseCode');
+      this.semester_time = params.get('semester_time');
+      this._router.navigate(['/course/semester/add-task/' + this.courseCode, this.semester_time])
+    });
+  }
+  deleteTask() {
+    this.sub = this._Activatedroute.paramMap.subscribe(params => {
+      this.courseCode = params.get('courseCode');
+      this.semester_time = params.get('semester_time');
+      this._router.navigate(['/course/semester/delete-task/' + this.courseCode, this.semester_time])
+    });
+  }
+} 

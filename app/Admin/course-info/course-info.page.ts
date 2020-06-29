@@ -31,6 +31,8 @@ export class courseInfoPage implements OnInit {
   public rows: any;
   currentUser: User;
   checkcoursesemesterstatus: any;
+  checkSemesterStatus: any;
+  hidebutton: any;
   constructor(private adminservices: AdminservicesService, private _Activatedroute: ActivatedRoute,
     private _router: Router,
     private authenticationService: AuthService,
@@ -62,18 +64,18 @@ export class courseInfoPage implements OnInit {
   get isTeacherOrStudent() {
     return this.currentUser && (this.currentUser.role === Role.Teacher || this.currentUser.role === Role.Student);
   }
-  get courseOpen() {
-    this.sub = this._Activatedroute.paramMap.subscribe(params => {
-      this.courseCode = params.get('courseCode');
-      this.semester_time = params.get('semester_time');
-      this.adminservices.getCourseSemesterData(this.courseCode, this.semester_time).subscribe(res => {
-        this.checkcoursesemesterstatus = res.findsemesterdata.semesters[0];
-      }, err => {
-        this.checkcoursesemesterstatus = err;
-      });
-    });
-    return this.checkcoursesemesterstatus.semester_status === "open";
-  }
+  // get courseOpen() {
+  //   this.sub = this._Activatedroute.paramMap.subscribe(params => {
+  //     this.courseCode = params.get('courseCode');
+  //     this.semester_time = params.get('semester_time');
+  //     this.adminservices.getCourseSemesterData(this.courseCode, this.semester_time).subscribe(res => {
+  //       this.checkcoursesemesterstatus = res.findsemesterdata.semesters[0];
+  //     }, err => {
+  //       this.checkcoursesemesterstatus = err;
+  //     });
+  //   });
+  //   return this.checkcoursesemesterstatus.semester_status === "open";
+  // }
   languageChanged() {
     this.translateConfigService.setLanguage(this.selectedLanguage);
   }
@@ -86,6 +88,14 @@ export class courseInfoPage implements OnInit {
       this.adminservices.getCourseSemesterData(this.courseCode, this.semester_time).subscribe(res => {
         this.coursesemesterdata = res.findsemesterdata.semesters[0];
         this.rows = res.findsemesterdata.semesters[0].grades;
+        this.checkSemesterStatus = this.coursesemesterdata.semester_status
+        if (this.checkSemesterStatus == "finished") {
+          this.hidebutton = false;
+        }
+        else if (this.checkSemesterStatus == "open") {
+          this.hidebutton = true;
+
+        }
       }, err => {
         this.rows = err;
       });
